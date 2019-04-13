@@ -8,47 +8,55 @@ Remember to put 'DarksCooldownAPI' into the dependencies of your plugin!
 
 <h3> Constructing a cooldown </h3>
 <p>
-New cooldown: new Cooldown(Player player, String code, int duration)
-<br>'player' is a Bukkit player to apply the cooldown to
+New cooldown:
+```java
+new Cooldown(Player player, String code, int duration)
+```
+<br>
+`player` is a Bukkit player to apply the cooldown to
 
-'code' is a specific string used to check for different types of cooldowns. Can be
+`code` is a specific string used to check for different types of cooldowns. Can be
 anything.
 
-'duration' is how long the cooldown should last in seconds
+`duration` is how long the cooldown should last in seconds
 </p>
 <h3> Methods </h3>
 <p>
-getPlayerUUID(); 
+`getPlayerUUID(); `
 <br>gets the player's UUID 
 
-getCode();
+`getCode();`
 <br>gets the code for this cooldown
 
-getEndTime();
+`getEndTime();`
 <br>gets the time the cooldown is supposed to end, in unix time
 
-setDuration(int duration);
+`setDuration(int duration);`
 <br>sets the duration time in seconds. Keep in mind that it uses the time the 
 cooldown was constructed to recalculate this
 
-getTimeRemaining();
+`getTimeRemaining();`
 <br>gets the time left, in Unix time, for this cooldown to expire
 
-getFormattedTimeLeft();
+`getFormattedTimeLeft();`
 <br>gets the time remaining in the format "00hr00m00s"
 
-remove();
+`remove();`
 <br>removes the cooldown from the config, and will no longer be found in 
-getCooldowns()
+`getCooldowns()`
 
-isExpired();
+`isExpired();`
 <br>returns true if the cooldown is expired, otherwise returns false
 
 
+```java
 Cooldown.getCooldowns(Player player);
+```
 <br>gets all cooldowns for a specific player
 
+```java
 Cooldown.getCooldown(Player player, String code);
+```
 <br>gets a specific Cooldown for a player and code. Returns null if the cooldown
 hasn't been set
 </p>
