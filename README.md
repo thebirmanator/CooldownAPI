@@ -10,7 +10,7 @@ Remember to put 'DarksCooldownAPI' into the dependencies of your plugin!
 <p>
 New cooldown:
 ```java
-new Cooldown(Player player, String code, int duration)
+new Cooldown(Player player, String code, int duration);
 ```
 <br>
 `player` is a Bukkit player to apply the cooldown to
@@ -48,6 +48,7 @@ cooldown was constructed to recalculate this
 `isExpired();`
 <br>returns true if the cooldown is expired, otherwise returns false
 
+<br>
 
 ```java
 Cooldown.getCooldowns(Player player);
