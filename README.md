@@ -52,11 +52,11 @@ cooldown was constructed to recalculate this
 ```java
 Cooldown.getCooldowns(Player player);
 ```
-<br>gets all cooldowns for a specific player
+gets all cooldowns for a specific player
 
 ```java
 Cooldown.getCooldown(Player player, String code);
 ```
-<br>gets a specific Cooldown for a player and code. Returns null if the cooldown
+gets a specific Cooldown for a player and code. Returns null if the cooldown
 hasn't been set
 </p>
