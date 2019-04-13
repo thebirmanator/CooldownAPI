@@ -21,7 +21,6 @@ anything.
 `duration` is how long the cooldown should last in seconds
 
 <h3> Methods </h3>
-<p>
 `getPlayerUUID(); `
 <br>gets the player's UUID 
 
@@ -60,4 +59,3 @@ Cooldown.getCooldown(Player player, String code);
 ```
 gets a specific Cooldown for a player and code. Returns null if the cooldown
 hasn't been set
-</p>
