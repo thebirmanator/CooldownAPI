@@ -7,7 +7,7 @@ API for plugins dealing with cooldowns
 Remember to put 'DarksCooldownAPI' into the dependencies of your plugin! 
 
 <h3> Constructing a cooldown </h3>
-<p>
+
 New cooldown:
 ```java
 new Cooldown(Player player, String code, int duration);
@@ -19,7 +19,7 @@ new Cooldown(Player player, String code, int duration);
 anything.
 
 `duration` is how long the cooldown should last in seconds
-</p>
+
 <h3> Methods </h3>
 <p>
 `getPlayerUUID(); `
