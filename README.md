@@ -13,6 +13,7 @@ New cooldown:
 new Cooldown(Player player, String code, int duration);
 ```
 <br>
+
 `player` is a Bukkit player to apply the cooldown to
 
 `code` is a specific string used to check for different types of cooldowns. Can be
@@ -21,7 +22,8 @@ anything.
 `duration` is how long the cooldown should last in seconds
 
 <h3> Methods </h3>
-`getPlayerUUID(); `
+
+`getPlayerUUID();`
 <br>gets the player's UUID 
 
 `getCode();`
