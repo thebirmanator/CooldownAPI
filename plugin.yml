@@ -1,5 +1,0 @@
-main: net.darkscorner.darkscooldown.Main
-name: DarksCooldownAPI
-version: 1.0
-author: TheBirmanator
-description: An API for dealing with cooldowns

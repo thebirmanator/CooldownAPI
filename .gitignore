@@ -1,0 +1,4 @@
+target/
+.idea/
+CooldownAPI.iml
+dependency-reduced-pom.xml

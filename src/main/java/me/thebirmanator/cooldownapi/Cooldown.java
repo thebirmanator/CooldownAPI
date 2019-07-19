@@ -1,5 +1,8 @@
-package net.darkscorner.darkscooldown;
+package me.thebirmanator.cooldownapi;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,12 +24,12 @@ public class Cooldown {
 	private Plugin plugin;
 	
 	// constructor for loading from the config ONLY (don't use it otherwise)
-	protected Cooldown(Plugin plugin, UUID playerUUID, String code, long startTime, long endTime) {
+	protected Cooldown(UUID playerUUID, String code, long startTime, long endTime) {
 		this.uuid = playerUUID;
 		this.code = code;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.plugin = plugin;
+		plugin = Main.getPlugin(Main.class);
 		
 		cooldowns.add(this);
 	}
@@ -38,13 +41,17 @@ public class Cooldown {
 		endTime = startTime + duration;
 		
 		plugin = Main.getPlugin(Main.class);
-		plugin.getConfig().set("cooldowns." + code + "." + uuid + ".startTime", startTime);
-		plugin.getConfig().set("cooldowns." + code + "." + uuid + ".endTime", endTime);
-		
+		//plugin.getConfig().set("cooldowns." + code + "." + uuid + ".startTime", startTime);
+		//plugin.getConfig().set("cooldowns." + code + "." + uuid + ".endTime", endTime);
+
+		boolean replaceData = false;
 		if(getCooldown(Bukkit.getPlayer(uuid), code) != null) { // so there's no duplicate cooldowns in the set (same player with same code"
 			cooldowns.remove(getCooldown(Bukkit.getPlayer(uuid), code));
+			replaceData = true;
 		}
 		cooldowns.add(this);
+
+		addToDatabase(replaceData);
 		
 	}
 	
@@ -62,8 +69,21 @@ public class Cooldown {
 	
 	public void setDuration(int duration) {
 		endTime = startTime + duration;
-		
-		plugin.getConfig().set("cooldowns." + code + "." + uuid + ".endTime", endTime);
+
+		Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+			@Override
+			public void run() {
+				try(Connection connection = Main.sc.getSql().getConnection()) {
+					PreparedStatement ps = connection.prepareStatement("UPDATE cooldowns SET endTime = " + endTime + "WHERE uuid = '" + uuid.toString() + "' AND type = '" + code + "';");
+					ps.execute();
+					ps.close();
+					connection.close();
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		//plugin.getConfig().set("cooldowns." + code + "." + uuid + ".endTime", endTime);
 	}
 	
 	public static Set<Cooldown> getCooldowns(Player player) {
@@ -105,7 +125,20 @@ public class Cooldown {
 	}
 	
 	public void remove() {
-		plugin.getConfig().set("cooldowns." + code + "." + uuid, null);
+		Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+			@Override
+			public void run() {
+				try(Connection connection = Main.sc.getSql().getConnection()) {
+					PreparedStatement ps = connection.prepareStatement("DELETE FROM cooldowns WHERE uuid = '" + uuid + "' AND type = '" + code + "';");
+					ps.execute();
+					ps.close();
+					connection.close();
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		//plugin.getConfig().set("cooldowns." + code + "." + uuid, null);
 		cooldowns.remove(this);
 	}
 	
@@ -114,5 +147,27 @@ public class Cooldown {
 			return true;
 		}
 		return false;
+	}
+
+	private void addToDatabase(boolean replacing) {
+		String sqlString = "INSERT INTO cooldowns (UUID, type, startTime, endTime) VALUES ('" + uuid + "', '" + code + "', '" + startTime + "', '" + endTime + "');";
+		if(replacing) {
+			sqlString = "UPDATE cooldowns SET startTime = " + startTime + ", endTime = " + endTime + "WHERE uuid = '" + uuid.toString() + "' AND type = '" + code + "';";
+		}
+		final String sql = sqlString;
+		Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+			@Override
+			public void run() {
+				try(Connection connection = Main.sc.getSql().getConnection()) {
+					PreparedStatement ps = connection.prepareStatement(sql);
+					ps.execute();
+					ps.close();
+					connection.close();
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
 	}
 }
