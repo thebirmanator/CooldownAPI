@@ -41,8 +41,6 @@ public class Cooldown {
 		endTime = startTime + duration;
 		
 		plugin = Main.getPlugin(Main.class);
-		//plugin.getConfig().set("cooldowns." + code + "." + uuid + ".startTime", startTime);
-		//plugin.getConfig().set("cooldowns." + code + "." + uuid + ".endTime", endTime);
 
 		boolean replaceData = false;
 		if(getCooldown(Bukkit.getPlayer(uuid), code) != null) { // so there's no duplicate cooldowns in the set (same player with same code"
@@ -74,7 +72,7 @@ public class Cooldown {
 			@Override
 			public void run() {
 				try(Connection connection = Main.sc.getSql().getConnection()) {
-					PreparedStatement ps = connection.prepareStatement("UPDATE cooldowns SET endTime = " + endTime + "WHERE uuid = '" + uuid.toString() + "' AND type = '" + code + "';");
+					PreparedStatement ps = connection.prepareStatement("UPDATE cooldowns SET endTime = " + endTime + " WHERE uuid = '" + uuid.toString() + "' AND type = '" + code + "';");
 					ps.execute();
 					ps.close();
 					connection.close();
@@ -83,7 +81,6 @@ public class Cooldown {
 				}
 			}
 		});
-		//plugin.getConfig().set("cooldowns." + code + "." + uuid + ".endTime", endTime);
 	}
 	
 	public static Set<Cooldown> getCooldowns(Player player) {
@@ -138,7 +135,6 @@ public class Cooldown {
 				}
 			}
 		});
-		//plugin.getConfig().set("cooldowns." + code + "." + uuid, null);
 		cooldowns.remove(this);
 	}
 	
@@ -152,7 +148,7 @@ public class Cooldown {
 	private void addToDatabase(boolean replacing) {
 		String sqlString = "INSERT INTO cooldowns (UUID, type, startTime, endTime) VALUES ('" + uuid + "', '" + code + "', '" + startTime + "', '" + endTime + "');";
 		if(replacing) {
-			sqlString = "UPDATE cooldowns SET startTime = " + startTime + ", endTime = " + endTime + "WHERE uuid = '" + uuid.toString() + "' AND type = '" + code + "';";
+			sqlString = "UPDATE cooldowns SET startTime = " + startTime + ", endTime = " + endTime + " WHERE uuid = '" + uuid.toString() + "' AND type = '" + code + "';";
 		}
 		final String sql = sqlString;
 		Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
