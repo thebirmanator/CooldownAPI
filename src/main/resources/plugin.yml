@@ -1,5 +1,9 @@
-main: me.thebirmanator.cooldownapi.Main
+main: games.indigo.cooldownapi.Main
 name: CooldownAPI
-version: 2.0
-author: TheBirmanator
+version: 2.1
+api-version: 1.13
+authors:
+  - TheBirmanator
+  - TheMGRF
 description: An API for dealing with cooldowns
+depend: [ServiceConnector]

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.darkscorner</groupId>
+    <groupId>games.indigo</groupId>
     <artifactId>CooldownAPI</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13.2-R0.1-SNAPSHOT</version>
+            <version>1.14.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <!-- ServiceConnector -->
@@ -30,7 +30,7 @@
             <groupId>.</groupId>
             <version>.</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Birman/Google Drive/Minecraft Jar Build Paths/ServiceConnector-0.0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>C:/Users/Thomas/Documents/IntelliJ Coding/ServiceConnector-0.0.1-SNAPSHOT.jar</systemPath>
         </dependency>
     </dependencies>
 
