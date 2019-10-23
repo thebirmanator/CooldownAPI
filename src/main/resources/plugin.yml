@@ -1,9 +1,9 @@
 main: games.indigo.cooldownapi.Main
 name: CooldownAPI
-version: 2.1
+version: 2.2
 api-version: 1.13
 authors:
   - TheBirmanator
   - TheMGRF
 description: An API for dealing with cooldowns
-depend: [ServiceConnector]
+depend: [DatabaseConnector]

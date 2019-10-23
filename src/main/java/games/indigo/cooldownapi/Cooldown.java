@@ -85,7 +85,7 @@ public class Cooldown {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
-                try (Connection connection = Main.sc.getSql().getConnection()) {
+                try (Connection connection = Main.database.getConnection(Main.DATABASE_NAME)) {
                     PreparedStatement ps = connection.prepareStatement("UPDATE cooldowns SET endTime = " + endTime + " WHERE uuid = '" + uuid.toString() + "' AND type = '" + code + "';");
                     ps.execute();
                     ps.close();
@@ -138,7 +138,7 @@ public class Cooldown {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
-                try (Connection connection = Main.sc.getSql().getConnection()) {
+                try (Connection connection = Main.database.getConnection(Main.DATABASE_NAME)) {
                     PreparedStatement ps = connection.prepareStatement("DELETE FROM cooldowns WHERE uuid = '" + uuid + "' AND type = '" + code + "';");
                     ps.execute();
                     ps.close();
@@ -164,7 +164,7 @@ public class Cooldown {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
-                try (Connection connection = Main.sc.getSql().getConnection()) {
+                try (Connection connection = Main.database.getConnection(Main.DATABASE_NAME)) {
                     PreparedStatement ps = connection.prepareStatement(sql);
                     ps.execute();
                     ps.close();

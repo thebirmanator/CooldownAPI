@@ -6,17 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-import net.antfarms.serviceconnector.ServiceConnector;
+import games.indigo.databaseconnector.DatabaseConnector;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-    static ServiceConnector sc;
+    static DatabaseConnector database;
+    static final String DATABASE_NAME = "instance_testing";
 
     public void onEnable() {
-        sc = Bukkit.getServicesManager().getRegistration(ServiceConnector.class).getProvider();
+        database = Bukkit.getServicesManager().getRegistration(DatabaseConnector.class).getProvider();
 
         saveDefaultConfig();
 
@@ -30,10 +31,10 @@ public class Main extends JavaPlugin {
 
     private void loadData() {
         Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
-            try (Connection connection = sc.getSql().getConnection()) {
+            try (Connection connection = database.getConnection(DATABASE_NAME)) {
                 // TODO: IntelliJ might complain here but this is valid sql
                 PreparedStatement ps = connection.prepareStatement(
-                        "CREATE TABLE IF NOT EXISTS cooldowns (\n" +
+                    "CREATE TABLE IF NOT EXISTS cooldowns (\n" +
                         "`uuid` VARCHAR(36) NOT NULL,\n" +
                         "`type` VARCHAR(50) NOT NULL,\n" +
                         "`startTime` INT(11) NOT NULL,\n" +
