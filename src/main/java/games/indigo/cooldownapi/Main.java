@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 
     static DatabaseConnector database;
-    static final String DATABASE_NAME = "instance_testing";
+    static final String DATABASE_NAME = "indigo";
 
     public void onEnable() {
         database = Bukkit.getServicesManager().getRegistration(DatabaseConnector.class).getProvider();

@@ -57,7 +57,7 @@ public class Cooldown {
         plugin = Main.getPlugin(Main.class);
 
         boolean replaceData = false;
-        if (getCooldown(Bukkit.getPlayer(uuid), code) != null) { // so there's no duplicate cooldowns in the set (same player with same code"
+        if (getCooldown(Bukkit.getPlayer(uuid), code) != null) { // so there's no duplicate cooldowns in the set (same player with same code)
             cooldowns.remove(getCooldown(Bukkit.getPlayer(uuid), code));
             replaceData = true;
         }

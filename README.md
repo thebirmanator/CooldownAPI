@@ -1,4 +1,4 @@
-# DarksCooldownAPI
+# CooldownAPI
 
 API for plugins dealing with cooldowns
 
@@ -8,11 +8,10 @@ Remember to put 'DarksCooldownAPI' into the dependencies of your plugin!
 
 <h3> Constructing a cooldown </h3>
 
-New cooldown:
+When creating a new cooldown simply create a new object:
 ```java
 new Cooldown(Player player, String code, int duration);
 ```
-<br>
 
 `player` is a Bukkit player to apply the cooldown to
 
@@ -21,42 +20,45 @@ anything.
 
 `duration` is how long the cooldown should last in seconds
 
-<h3> Methods </h3>
+<h3>Methods</h3>
 
-`getPlayerUUID();`
-<br>gets the player's UUID 
+Get the UUID of the player associated with the cooldown<br>
+`#getPlayerUUID();` 
 
+Get the cooldown code<br>
 `getCode();`
-<br>gets the code for this cooldown
 
+Get the end time of the cooldown (Unix Timestamp)<br>
 `getEndTime();`
-<br>gets the time the cooldown is supposed to end, in unix time
 
+Set the duration (time in seconds). Keep in mind that it uses the time the cooldown was constructed to recalculate this<br>
 `setDuration(int duration);`
-<br>sets the duration time in seconds. Keep in mind that it uses the time the 
-cooldown was constructed to recalculate this
 
+Get the time left on a cooldown (Unix Timestamp)<br>
 `getTimeRemaining();`
-<br>gets the time left, in Unix time, for this cooldown to expire
 
+Get the formatted time remaining on a cooldown "00hr00m00s"<br>
 `getFormattedTimeLeft();`
-<br>gets the time remaining in the format "00hr00m00s"
 
+Remove the cooldown from the config<br>
 `remove();`
-<br>removes the cooldown from the config, and will no longer be found in 
+
+Get a Set of all available Cooldowns<br>
 `getCooldowns()`
 
+Check if a cooldown has expired. Returns true if the cooldown is expired, otherwise returns false.<br>
 `isExpired();`
-<br>returns true if the cooldown is expired, otherwise returns false
-
+<br><i>This alone is sometimes not enough, you can use `cooldown == null || cooldown.isExpired()` to be sure.</i>
 <br>
 
-gets all cooldowns for a specific player
+<h3>Examples</h3>
+
+Gets all cooldowns associated with a specific player
 ```java
 Cooldown.getCooldowns(Player player);
 ```
 
-gets a specific Cooldown for a player and code. Returns null if the cooldown hasn't been set
+Get a specific Cooldown for a player, code being the id of the cooldown. Returns null if the cooldown hasn't been set
 ```java
 Cooldown.getCooldown(Player player, String code);
 ```
