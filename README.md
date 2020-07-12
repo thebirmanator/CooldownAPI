@@ -4,7 +4,7 @@ API for plugins dealing with cooldowns
 
 <h2> How to Use </h2>
 
-Remember to put `DarksCooldownAPI` into the dependencies of your plugin! 
+Remember to put `CooldownAPI` into the dependencies of your plugin! 
 
 <h3> Constructing a cooldown </h3>
 
