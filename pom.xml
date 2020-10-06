@@ -31,7 +31,9 @@
             <artifactId>.</artifactId>
             <version>.</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Thomas/Documents/IntelliJ Coding/IndigoGames/DatabaseConnector/target/databaseconnector-0.0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>C:/Users/Thomas/Documents/IntelliJ
+                Coding/IndigoGames/DatabaseConnector/target/databaseconnector-0.0.1-SNAPSHOT.jar
+            </systemPath>
         </dependency>
     </dependencies>
 

@@ -6,4 +6,4 @@ authors:
   - TheBirmanator
   - TheMGRF
 description: An API for dealing with cooldowns
-depend: [DatabaseConnector]
+depend: [ DatabaseConnector ]

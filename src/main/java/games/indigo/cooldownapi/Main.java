@@ -1,15 +1,15 @@
 package games.indigo.cooldownapi;
 
+import games.indigo.databaseconnector.DatabaseConnector;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
-
-import games.indigo.databaseconnector.DatabaseConnector;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
@@ -34,12 +34,12 @@ public class Main extends JavaPlugin {
             try (Connection connection = database.getConnection(DATABASE_NAME)) {
                 // TODO: IntelliJ might complain here but this is valid sql
                 PreparedStatement ps = connection.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS cooldowns (\n" +
-                        "`uuid` VARCHAR(36) NOT NULL,\n" +
-                        "`type` VARCHAR(50) NOT NULL,\n" +
-                        "`startTime` INT(11) NOT NULL,\n" +
-                        "`endTime` INT(11) NOT NULL\n" +
-                        ") COLLATE='latin1_swedish_ci' ENGINE=InnoDB;"
+                        "CREATE TABLE IF NOT EXISTS cooldowns (\n" +
+                                "`uuid` VARCHAR(36) NOT NULL,\n" +
+                                "`type` VARCHAR(50) NOT NULL,\n" +
+                                "`startTime` INT(11) NOT NULL,\n" +
+                                "`endTime` INT(11) NOT NULL\n" +
+                                ") COLLATE='latin1_swedish_ci' ENGINE=InnoDB;"
                 );
 
                 ps.execute();
