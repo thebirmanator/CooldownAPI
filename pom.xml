@@ -30,7 +30,8 @@
             <groupId>.</groupId>
             <version>.</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Birman/Google Drive/Minecraft Jar Build Paths/ServiceConnector-0.0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>C:/Users/Birman/Google Drive/Minecraft Jar Build Paths/ServiceConnector-0.0.1-SNAPSHOT.jar
+            </systemPath>
         </dependency>
     </dependencies>
 
